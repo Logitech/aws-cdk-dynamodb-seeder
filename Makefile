@@ -1,7 +1,7 @@
 SHELL := /bin/bash -o pipefail
 
 DOCKER_IMAGE := jsii/superchain
-DOCKER_TAG := latest
+DOCKER_TAG := 1-buster-slim-node16
 DOCKER_WORKDIR := /workdir
 
 build:
@@ -9,7 +9,7 @@ build:
 		--workdir ${DOCKER_WORKDIR} \
 		--volume ${PWD}:${DOCKER_WORKDIR} \
 		${DOCKER_IMAGE}:${DOCKER_TAG} \
-		/bin/bash -c "rm -rf dist && npm i && npm run package"
+		/bin/bash -c "rm -rf dist && npm i --legacy-peer-deps && npm run package"
 
 publish-npm:
 	docker run \

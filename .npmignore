@@ -2,7 +2,7 @@ src
 tsconfig.json
 tslint.json
 .prettierrc
-
+.idea
 
 # Exclude jsii outdir
 dist
