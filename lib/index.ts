@@ -13,6 +13,7 @@ export interface Props {
   readonly setup: Item[];
   readonly teardown?: ItemKey[];
   readonly refreshOnUpdate?: boolean;
+  readonly runtime?: Runtime;
 }
 
 export interface ItemKey {
@@ -56,7 +57,7 @@ export class Seeder extends Construct {
     });
 
     const fn = new Function(this, 'handler', {
-      runtime: Runtime.NODEJS_12_X,
+      runtime: this.props.runtime || Runtime.NODEJS_16_X,
       handler: 'index.handler',
       timeout: Duration.seconds(900),
       code: Code.fromInline(`
