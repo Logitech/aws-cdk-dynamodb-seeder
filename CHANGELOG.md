@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.57.0](https://github.com/elegantdevelopment/aws-cdk-dynamodb-seeder/compare/v1.56.2...v1.57.0) (2023-06-15)
+
+
+### Features
+
+* Node.js runtime updated to v16 ([1cb1047](https://github.com/elegantdevelopment/aws-cdk-dynamodb-seeder/commit/1cb104723dc9dfab710f2562bc673d02b179f153))
+
 ### [1.56.2](https://github.com/elegantdevelopment/aws-cdk-dynamodb-seeder/compare/v1.56.1...v1.56.2) (2023-06-15)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "aws-cdk-dynamodb-seeder",
-  "version": "1.56.2",
+  "version": "1.57.0",
   "description": "A simple CDK JSON seeder for DynamoDB",
   "scripts": {
     "build": "jsii",
