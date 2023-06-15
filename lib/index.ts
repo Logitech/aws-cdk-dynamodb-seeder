@@ -21,7 +21,7 @@ export interface Props {
   readonly setup: Item[];
   readonly teardown?: ItemKey[];
   readonly refreshOnUpdate?: boolean;
-  readonly runtime?: Runtime;
+  readonly runtime?: aws_lambda.Runtime;
 }
 
 export type ItemKey = object;
