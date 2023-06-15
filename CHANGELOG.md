@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/elegantdevelopment/aws-cdk-dynamodb-seeder/compare/v1.57.0...v2.0.0) (2023-06-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrated to AWS CDK v2
+
+### Features
+
+* migrated to AWS CDK v2 ([003db9c](https://github.com/elegantdevelopment/aws-cdk-dynamodb-seeder/commit/003db9ca2fe4238b7d29e21c081f0fbef23005e3))
+
 ## [1.57.0](https://github.com/elegantdevelopment/aws-cdk-dynamodb-seeder/compare/v1.56.2...v1.57.0) (2023-06-15)
 
 

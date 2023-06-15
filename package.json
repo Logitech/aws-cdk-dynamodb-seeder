@@ -1,6 +1,6 @@
 {
   "name": "@logitech/aws-cdk-dynamodb-seeder",
-  "version": "1.57.0",
+  "version": "2.0.0",
   "description": "A simple CDK JSON seeder for DynamoDB",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -101,11 +101,14 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.tsx?$": ["ts-jest", {
-        "diagnostics": {
-          "warnOnly": true
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "diagnostics": {
+            "warnOnly": true
+          }
         }
-      }]
+      ]
     },
     "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "collectCoverage": true,
