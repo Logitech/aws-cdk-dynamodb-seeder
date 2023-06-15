@@ -1,31 +1,36 @@
-import { Construct, RemovalPolicy, Duration } from '@aws-cdk/core';
-import { Table } from '@aws-cdk/aws-dynamodb';
-import { Function, Runtime, Code } from '@aws-cdk/aws-lambda';
-import { Bucket } from '@aws-cdk/aws-s3';
-import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
-import { AwsCustomResource, AwsSdkCall, AwsCustomResourcePolicy } from '@aws-cdk/custom-resources';
+import {
+  aws_dynamodb,
+  aws_lambda,
+  aws_s3,
+  aws_s3_deployment,
+  custom_resources,
+  Duration,
+  RemovalPolicy,
+} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 import * as tmp from 'tmp';
 import * as fs from 'fs';
-import { BucketEncryption } from '@aws-cdk/aws-s3/lib/bucket';
+
+const { Function, Runtime, Code } = aws_lambda;
+const { Bucket, BucketEncryption } = aws_s3;
+const { BucketDeployment, Source } = aws_s3_deployment;
+const { AwsCustomResource, AwsCustomResourcePolicy } = custom_resources;
 
 export interface Props {
-  readonly table: Table;
+  readonly table: aws_dynamodb.Table;
   readonly setup: Item[];
   readonly teardown?: ItemKey[];
   readonly refreshOnUpdate?: boolean;
   readonly runtime?: Runtime;
 }
 
-export interface ItemKey {
-  [key: string]: string | number;
-}
+export type ItemKey = object;
 
-export interface Item {
-  [key: string]: any;
-}
+export type Item = object;
 
 export class Seeder extends Construct {
   protected props: Props;
+
   constructor(scope: Construct, id: string, props: Props) {
     super(scope, id);
     if (!props.setup || !Array.isArray(props.setup)) throw new Error('setup value must be an array of JSON objects');
@@ -131,32 +136,32 @@ exports.handler = async (event) => {
       },
       onDelete: props.teardown
         ? {
-            ...this.callLambdaOptions(),
-            parameters: {
-              FunctionName: fn.functionArn,
-              InvokeArgs: JSON.stringify({
-                mode: 'delete',
-              }),
-            },
-          }
+          ...this.callLambdaOptions(),
+          parameters: {
+            FunctionName: fn.functionArn,
+            InvokeArgs: JSON.stringify({
+              mode: 'delete',
+            }),
+          },
+        }
         : undefined,
       onUpdate: props.refreshOnUpdate
         ? {
-            ...this.callLambdaOptions(),
-            parameters: {
-              FunctionName: fn.functionArn,
-              InvokeArgs: JSON.stringify({
-                mode: 'update',
-              }),
-            },
-          }
+          ...this.callLambdaOptions(),
+          parameters: {
+            FunctionName: fn.functionArn,
+            InvokeArgs: JSON.stringify({
+              mode: 'update',
+            }),
+          },
+        }
         : undefined,
       policy: AwsCustomResourcePolicy.fromSdkCalls({ resources: AwsCustomResourcePolicy.ANY_RESOURCE }),
     });
     fn.grantInvoke(onEvent);
   }
 
-  private callLambdaOptions(): AwsSdkCall {
+  private callLambdaOptions(): custom_resources.AwsSdkCall {
     return {
       service: 'Lambda',
       action: 'invokeAsync',
