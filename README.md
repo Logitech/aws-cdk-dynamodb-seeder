@@ -12,6 +12,13 @@
 
 A simple CDK JSON seeder for DynamoDB
 
+Forked by Logitech in May 2021
+
+Every significant change to this repo should result in a new tag, most easily created with:  
+```shell
+npx standard-version
+```
+
 ## Why this package
 
 Glad you asked!
